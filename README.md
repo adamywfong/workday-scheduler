@@ -2,9 +2,9 @@
 
 ## Description
 
-This is a simple coding quiz.  It was created as an exercise to practice various javascript concepts, in particular using the DOM to add event listeners and interface with the html, using timeIntervals, and implementing local storage.
+This is a scheduler for a single workday.  When the app is loaded, the current date displays in the header, timeslot for the working hours 9AM - 5pm are generated, and the timeblocks are color coded based on the current time.  Each timeslot has text areas that can be filled in with tasks for the particular time, and pressing the save button to the right of the text area will save the text locally, so that when the page is refreshed, the text will remain in the text area.
 
-When the start button is clicked, a series of multiple choice questions will populate with buttons that the user can click to select their answer.  When the quiz is complete, the user will be able to enter their initials and pressing 'Submit' will save their score onto a high score list.  Clicking the view high scores text on the top left will allow the user to view the current highscore list at any time.  When viewing the highscore list, pressing the 'Clear Highscores' button will clear the current high scores list, and pressing the 'Go Back' button will return to the previous screen, or to the start screen if their last quiz results were just submitted.
+This project was created as an exercise to practice using local storage and practive creating html elements through JavaScript by navigating the DOM.
 
 Link to site: [https://adamywfong.github.io/workday-scheduler/](https://adamywfong.github.io/workday-scheduler/).
 
