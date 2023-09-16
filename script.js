@@ -2,8 +2,8 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 
-//Displays current day in Day, Month # format
-$('#currentDay').text(dayjs().format('dddd, MMMM D'));
+var currentTime = dayjs();
+var schedule = $('#scheduleBox');
 
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
@@ -25,3 +25,49 @@ $(function () {
   //
   // TODO: Add code to display the current date in the header of the page.
 });
+
+
+//checkTime function compares number to current time in 24:00 format and returns 'past', 'present', or 'future
+function checkTime(number) {
+  if (currentTime.$H===number) {
+    return 'present';
+  } else if (number < currentTime.$H) {
+    return 'past';
+  } else {
+    return 'future';
+  }
+}
+
+function makeRow(number) {
+  //textContent = localStorage.getItem('hour-'+number);
+  var textContent = 'get from local storage';
+  var timeBlock = $('<div>').addClass("row time-block")
+  timeBlock.addClass(checkTime(number));
+  var hour = $('<div>').addClass("col-2 col-md-1 hour text-center py-3");
+  var textArea = $('<textarea rows="3">').addClass("col-8 col-md-10 description");
+  textArea.text(textContent);
+  if (number < 12) {
+    hour.text(number + "AM");
+  } else if (number === 12) {
+    hour.text('12PM') ;
+  } else {
+    hour.text(number%12+'PM');
+  }
+  timeBlock.append(hour);
+  timeBlock.append(textArea);
+  timeBlock.append('<button class="btn saveBtn col-2 col-md-1" aria-label="save">'+
+       '<i class="fas fa-save" aria-hidden="true"></i>'+
+       '</button>');
+  schedule.append(timeBlock);
+}
+
+function init() {
+  //Displays current day in Day, Month # format
+  $('#currentDay').text(currentTime.format('dddd, MMMM D'));
+  //Add 9am - 5pm to schedule-box
+  for (var i = 9; i < 18; i++) {
+    makeRow(i);
+  }
+}
+
+init();
