@@ -24,7 +24,7 @@ function makeRow(number) {
   hour.addClass("col-2 col-md-1 hour text-center py-3");
   var textArea = $('<textarea rows="3">');
   textArea.addClass("col-8 col-md-10 description");
-  textArea.text(textContent);
+  textArea.val(textContent);
   if (number < 12) {
     hour.text(number + "AM");
   } else if (number === 12) {
