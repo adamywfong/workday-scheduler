@@ -1,17 +1,34 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
-
 var currentTime = dayjs();
 var schedule = $('#scheduleBox');
 
 function init() {
   //Displays current day in Day, Month # format
-  $('#currentDay').text(currentTime.format('dddd, MMMM D'));
+  var withOrdinal = addOrdinal(currentTime);
+  $('#currentDay').text(withOrdinal);
   //Add 9am - 5pm timeblocks to schedule-box
   for (var i = 9; i < 18; i++) {
     makeRow(i);
   }
+}
+
+//Adds ordinal to current day's date (e.g. 1-->1st, 2-->2nd, ... , 30-->30th) 
+function addOrdinal(dayjsObject) {
+  words = dayjsObject.format('dddd, MMMM D').split(' ');
+  if (parseInt(words[2],10) > 3 && parseInt(words[2],10) < 21) {
+    words[2]+='th';
+  } else if (parseInt(words[2],10) % 10 === 1){
+    words[2]+='st';
+  } else if (parseInt(words[2],10) % 10 === 2){
+    words[2]+='nd';
+  } else if (parseInt(words[2],10) % 10 === 3){
+    words[2]+='rd';
+  } else {
+    words[2]+='th';
+  }
+  return words.join(' ');
 }
 
 //Makes the timeblock for the hour (number) when (number) is submitted in 0-23 hour format
