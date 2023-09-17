@@ -62,8 +62,6 @@ function saveText(event) {
   event.preventDefault();
   var clicked = $(event.target);
   var timeBlockClicked = $(clicked.closest('.time-block'));
-  console.log($(event.target));
-  console.log(timeBlockClicked);
   localStorage.setItem(timeBlockClicked.attr('id'), $(timeBlockClicked).children().eq(1).val());
 }
 
