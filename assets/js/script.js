@@ -5,7 +5,7 @@ var currentTime = dayjs();
 var schedule = $('#scheduleBox');
 
 function init() {
-  //Displays current day in Day, Month # format
+  //Displays current date in header in Day, Month #th format
   var withOrdinal = addOrdinal(currentTime);
   $('#currentDay').text(withOrdinal);
   //Add 9am - 5pm timeblocks to schedule-box
@@ -31,7 +31,7 @@ function addOrdinal(dayjsObject) {
   return words.join(' ');
 }
 
-//Makes the timeblock for the hour (number) when (number) is submitted in 0-23 hour format
+//Generates the timeblock for the hour (number) when (number) is submitted in 0-23 hour format and adds to schedule
 function makeRow(number) {
   var textContent = localStorage.getItem('hour'+number);
   var timeBlock = $('<div id="hour' + number + '">');
@@ -61,7 +61,10 @@ function makeRow(number) {
 function saveText(event) {
   event.preventDefault();
   var clicked = $(event.target);
-  localStorage.setItem($(clicked.parent()).attr('id'),$(clicked.prev()).val());
+  var timeBlockClicked = $(clicked.closest('.time-block'));
+  console.log($(event.target));
+  console.log(timeBlockClicked);
+  localStorage.setItem(timeBlockClicked.attr('id'), $(timeBlockClicked).children().eq(1).val());
 }
 
 //checkTime function compares number to current time in 24 hour format and returns 'past', 'present', or 'future
