@@ -1,6 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 var currentTime = dayjs();
 var schedule = $('#scheduleBox');
 
@@ -60,8 +57,7 @@ function makeRow(number) {
 //Saves text of clicked timeBlock to localStorage
 function saveText(event) {
   event.preventDefault();
-  var clicked = $(event.target);
-  var timeBlockClicked = $(clicked.closest('.time-block'));
+  var timeBlockClicked = $(event.target.closest('.time-block'));
   localStorage.setItem(timeBlockClicked.attr('id'), $(timeBlockClicked).children().eq(1).val());
 }
 
@@ -77,6 +73,7 @@ function checkTime(number) {
 }
 
 //Event listener checks if save button is clicked
-schedule.on('click', '.saveBtn', saveText);
-
-init();
+$(function() {
+  schedule.on('click', '.saveBtn', saveText);
+  init();
+});
